@@ -87,7 +87,7 @@ NSString * const EZRExceptionReason_CasedNodeMustGenerateBySwitchOrSwitchMapOper
     }];
 }
 
-- (EZRNode *)then:(void(^)(EZRNode<id> *node))thenBlock {
+- (EZRNode *)then:(void(^NS_NOESCAPE)(EZRNode<id> *node))thenBlock {
     NSParameterAssert(thenBlock);
     if (thenBlock) {
         thenBlock(self);
@@ -164,23 +164,23 @@ NSString * const EZRExceptionReason_CasedNodeMustGenerateBySwitchOrSwitchMapOper
     return [self delay:timeInterval queue:dispatch_get_main_queue()];
 }
 
-- (id<EZRCancelable>)syncWith:(EZRNode *)othEZRNode transform:(id  _Nonnull (^)(id _Nonnull))transform revert:(id  _Nonnull (^)(id _Nonnull))revert {
+- (id<EZRCancelable>)syncWith:(EZRNode *)otherNode transform:(id  _Nonnull (^)(id _Nonnull))transform revert:(id  _Nonnull (^)(id _Nonnull))revert {
     NSParameterAssert(transform);
     NSParameterAssert(revert);
     EZRMapTransform *mapTransform = [[EZRMapTransform alloc] initWithMapBlock:transform];
     EZRMapTransform *mapRevert = [[EZRMapTransform alloc] initWithMapBlock:revert];
     
-    id<EZRCancelable> transformCancelable = [self linkTo:othEZRNode transform:mapTransform];
-    id<EZRCancelable> revertCancelable = [othEZRNode linkTo:self transform:mapRevert];
+    id<EZRCancelable> transformCancelable = [self linkTo:otherNode transform:mapTransform];
+    id<EZRCancelable> revertCancelable = [otherNode linkTo:self transform:mapRevert];
     return [[EZRBlockCancelable alloc] initWithBlock:^{
         [transformCancelable cancel];
         [revertCancelable cancel];
     }];
 }
 
-- (id<EZRCancelable>)syncWith:(EZRNode *)othEZRNode {
+- (id<EZRCancelable>)syncWith:(EZRNode *)otherNode {
     id (^idFunction)(id) = ^(id source) { return source; };
-    return [self syncWith:othEZRNode transform:idFunction revert:idFunction];
+    return [self syncWith:otherNode transform:idFunction revert:idFunction];
 }
 
 - (EZRNode *)scanWithStart:(id)startingValue reduce:(EZRReduceBlock)reduceBlock {
@@ -311,7 +311,7 @@ EZTNamedTupleImp(EZRSwitchedNodeTuple)
 
 @implementation EZRIFResult (Extension)
 
-- (EZRIFResult *)then:(void (^)(EZRNode<id> * _Nonnull))thenBlock {
+- (EZRIFResult *)then:(void (^NS_NOESCAPE)(EZRNode<id> * _Nonnull))thenBlock {
      NSParameterAssert(thenBlock);
     if (thenBlock) {
         thenBlock(self.thenNode);
@@ -319,7 +319,7 @@ EZTNamedTupleImp(EZRSwitchedNodeTuple)
     return self;
 }
 
-- (EZRIFResult *)else:(void (^)(EZRNode<id> * _Nonnull))elseBlock {
+- (EZRIFResult *)else:(void (^NS_NOESCAPE)(EZRNode<id> * _Nonnull))elseBlock {
     NSParameterAssert(elseBlock);
     if (elseBlock) {
         elseBlock(self.elseNode);

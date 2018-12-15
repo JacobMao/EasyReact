@@ -104,15 +104,15 @@ pod 'EasyReact'
 
 EasyReact 包含了完善的单元测试，相关代码在 Example/Tests 文件夹下。你可以打开示例工程并执行 Test 命令来运行这些单元测试。
 
-## EasyReact, ReactiveCocoa, RxSwift 常见API 基于耗时的 Benchmarking
+## EasyReact 和 ReactiveCocoa 常见API 基于耗时的 Benchmarking
 
 ### 测试环境
 
-编译平台: macOS High Sierra 10.13.5
+编译平台: macOS Mojave 10.14
 
-IDE: Xcode 9.4.1
+IDE: Xcode 10.0(10A255)
 
-真机设备: iPhone X 256G iOS 11.4(15F79)
+真机设备: iPhone XS Max 256G iOS 12.0(16A366)
 
 ### 测试对象
 
@@ -127,11 +127,11 @@ IDE: Xcode 9.4.1
 
 重复上面的实验10次，得到数据平均值如下：
 
-| name          | listener | map      | filter   | flattenMap | combine   | zip       | merge    | syncWith |
-| ------------- | -------- | -------- | -------- | ---------- | --------- | --------- | -------- | -------- |
-| EasyReact     | 1860665  | 30285707 | 7043007  | 7259761    | 6234540   | 63384482  | 19794457 | 12359669 |
-| ReactiveCocoa | 4054261  | 74416369 | 45095903 | 44675757   | 209096028 | 143311669 | 13898969 | 53619799 |
-| RAC:EasyReact | 217.89%  | 245.71%  | 640.29%  | 615.39%    | 3353.83%  | 226.10%   | 70.22%   | 433.83%  |
+|name|listener|map|filter|flattenMap|combine|zip|merge|syncWith|
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|EasyReact|4218689|26615802|9872381|9896752|5744164|48405085|29639206|11846827|
+|ReactiveCocoa|2263981|42883385|28768289|28810331|127882031|82689281|6809210|30935277|
+|RAC:EasyReact|53.7%|161.1%|291.4%|291.1%|2226.3%|170.8%|23.0%|261.1%|
 
 ![benchmark](./images/benchmark.png)
 
@@ -139,7 +139,7 @@ IDE: Xcode 9.4.1
 
 基于Objective-C语言实现的EasyReact和ReactiveCocoa：
 
-ReactiveCocoa 平均耗时是 EasyReact 的 725.41%
+ReactiveCocoa 平均耗时是 EasyReact 的 434.8%
 
 EasyReact 的 swift 版本即将开源，届时会和 RxSwift 进行 benchmark 的比较。
 
@@ -158,6 +158,18 @@ qiezishu, [qiezishu@yahoo.com](mailto:qiezishu@yahoo.com)
 
 EasyReact 使用 [Apache Public License 2.0 许可证](./LICENSE)。
 
+## 相关文章
+
+- [美团客户端响应式框架 EasyReact 开源啦](https://tech.meituan.com/react_programming_framework_easyreact_opensource.html)
+- [EasyReact的简单试用及和RAC的对比](https://juejin.im/post/5b7bb2f651882542b60ea570)
+- [「 iOS知识小集 」2018 · 第 25 期——简单聊聊美团 EasyReact](https://mp.weixin.qq.com/s/AtwyT_eR3DWtBtBpm63uig)
+
 ## 其他
 
 想要一起共同发展 EasyReact 么？发送简历到 [邮件](mailto:it_easyreact@meituan.com) 加入我们！
+
+微信交流群：
+
+加下方小助手微信，自动通过后输入 “EasyReact” 即可加入微信交流群。
+
+![加入微信交流群](images/wechat.jpeg)

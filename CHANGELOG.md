@@ -7,14 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## 2.3.1 - 2018-10-16
+
+### Fixed
+
+- restore syncWith: direct.
+
+## 2.3.0 - 2018-10-10
+
 ### Added
 
 - EZRPerformSelectorListen edge. [ISSUE 28](https://github.com/meituan/EasyReact/issues/28)
+- Print warning message when set values to node which no downstreams.
+- setValue:senderList:context method within NSMutableNode. [ISSUE 42](https://github.com/meituan/EasyReact/issues/42)
 
 ### Fixed
 
 - EZRListenEdge dealloc delayed.
 - Set value within transferring raise other receiving order uncertain.
+- syncWith: sync direct is opposite. [ISSUE 33](https://github.com/meituan/EasyReact/issues/33)
 
 ### Changed
 
